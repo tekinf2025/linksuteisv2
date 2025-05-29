@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links Úteis - Tekinformática</title>
+    <link rel="icon" href="https://i.imgur.com/GXXvAOp.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+            background-color: #1e1e1e;
+            width: 100%;
+            max-width: 90px; /* Reduzindo a largura máxima dos cards */
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+            background-color: #2d2d2d;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: #4fd1c5;
+        }
+        
+        .contact-button {
+            transition: all 0.3s ease;
+        }
+        
+        .contact-button:hover {
+            transform: scale(1.03);
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+            gap: 10px;
+        }
+        
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="gradient-bg text-white py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-3 md:mb-0">
+                    <div class="mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="#4fd1c5">
+                            <path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold">Tekinformática</h1>
+                        <p class="text-xs text-cyan-200">Soluções em Tecnologia</p>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-lg font-semibold">Links Úteis</h2>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Loja Section -->
+        <section class="mb-8">
+            <h2 class="text-xl font-bold text-gray-200 mb-4 section-title">Loja</h2>
+            <div class="card-grid">
+                <!-- Card 1 -->
+                <a href="https://outlook.live.com/mail/0/inbox" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/rSifayU.png" alt="Whatsapp" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Hotmail</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 2 -->
+                <a href="https://web.whatsapp.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/b2x6AkR.png" alt="Whatsapp" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Whatsapp</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 3 -->
+                <a href="https://www.appsheet.com/start/c9165fa8-2c94-4524-9aa0-7030605d7e46" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/VazC9e0.png" alt="Whatsapp" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Gerenciador</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 4 -->
+                <a href="https://www.appsheet.com/start/8f01a344-a758-48e9-85eb-e95b4c12dbd6" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/mrmGTvw.png" alt="Gerenciador" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Sistema</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 5 -->
+                <a href="https://escritorio-virtual.sigma.st/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/KnuHpia.png" alt="Gerenciador" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">P2X</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 6 -->
+                <a href="https://3rewfds2qw.p2server.me/login" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/UlasOYT.png" alt="Gerenciador" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">P2 Server</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 7 -->
+                <a href="http://144.126.138.217:25500/login.php" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/31XJN4J.png" alt="ntDown" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">RTV</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 8 -->
+                <a href="https://dashboard.bz/login.php" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/LSmsswL.png" alt="ntDown" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">cPlayer</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 9 -->
+                <a href="https://cms.ntdev.in/login" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/bd9kh1n.png" alt="ntDown" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">ntDown</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 10 (Telegram) -->
+                <a href="https://web.telegram.org/z/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/xGKCOE8.png" alt="Telegram" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Telegram</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 11 (Telegram) -->
+                <a href="https://www.instagram.com/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/vSymemV.png" alt="Telegram" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Instagram</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 12 (Telegram) -->
+                <a href="https://www.appsheet.com/home/apps" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/LGLEQUh.png" alt="Telegram" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">AppSheets</h3>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Streaming Section -->
+        <section class="mb-8">
+            <h2 class="text-xl font-bold text-gray-200 mb-4 section-title">Streaming</h2>
+            <div class="card-grid">
+                <!-- Card 1 -->
+                <a href="https://studio.youtube.com/channel/UCpYkPHq4sa97EPQxjb-PCsQ/videos/upload?filter=%5B%5D&sort=%7B%22columnType%22%3A%22date%22%2C%22sortOrder%22%3A%22DESCENDING%22%7D" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/1jpsgdO.png" alt="Whatsapp" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Canal</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 2 -->
+                <a href="https://tekinf2025.github.io/videos/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/jDqnGka.png" alt="Whatsapp" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Vídeo App</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 3 -->
+                <a href="https://escritorio-virtual.xyz/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/KnuHpia.png" alt="Whatsapp" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">P2X xyz</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 4 -->
+                <a href="https://p2xloja.com/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/KnuHpia.png" alt="Gerenciador" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">P2x Loja</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 5 -->
+                <a href="https://my.contabo.com/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/WDCTRp3.png" alt="Gerenciador" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Contabo</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 6 -->
+                <a href="https://dash.cloudflare.com/65ec268477ca2432ca13dd342f51957a" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/aQrucbl.png" alt="Gerenciador" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Cloudflare</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 7 -->
+                <a href="https://sites.google.com/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/tr2fCoT.png" alt="ntDown" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Goog Sites</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 8 -->
+                <a href="https://iboproapp.com/manage-playlists/login" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/ZA08eBK.png" alt="ntDown" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Ibo Player</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 9 -->
+                <a href="https://smartone-iptv.com/plugin/smart_one/main_generate" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/I33LB8p.png" alt="ntDown" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Smartone</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 10 (Telegram) -->
+                <a href="https://lazerplay.io/#/upload-playlist" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/YUYekAk.png" alt="Telegram" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Lazer P.</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 11 (Telegram) -->
+                <a href="https://cms.bayip.tv/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/VkCVAMK.png" alt="Telegram" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Bay Tv</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 12 (Telegram) -->
+                <a href="https://edit.duplexplay.com/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/o9XaCEw.png" alt="Telegram" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Duplex P.</h3>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Financeiro Section -->
+        <section class="mb-8">
+            <h2 class="text-xl font-bold text-gray-200 mb-4 section-title">Financeiro</h2>
+            <div class="card-grid">
+                <!-- Card 1 -->
+                <a href="https://www.appsheet.com/start/4294f6da-89c2-4db4-8e25-97e6331fa07c" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/r9D4E6t.png" alt="Whatsapp" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Controle</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 2 -->
+                <a href="https://www.appsheet.com/start/6da24333-ecbc-49fc-af48-a7756a317871" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/LnJ8WCw.png" alt="Whatsapp" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Investim.</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 3 -->
+                <a href="https://www.investidor.b3.com.br/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/3csQ5jQ.png" alt="Whatsapp" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Bolsa V.</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 4 -->
+                <a href="https://app.btgpactual.com/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/qI1YTjQ.png" alt="Gerenciador" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">BTG Pactual</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 5 -->
+                <a href="https://br.tradingview.com/chart/OyNMzTDV/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/oBBv0ge.png" alt="Gerenciador" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">TradingView</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 6 -->
+                <a href="https://br.investing.com/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/AMBHVFe.png" alt="Gerenciador" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Investing</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 7 -->
+                <a href="https://www.tesourodireto.com.br/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/Zx75nlo.png" alt="ntDown" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Tesouro</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 8 -->
+                <a href="https://app.nubank.com.br/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/Wuv0YFe.png" alt="ntDown" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Nu-Bank</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 9 -->
+                <a href="https://autoatendimento.bb.com.br/apf-apj-acesso/#/transacao/acesso-apj/1?tipoCliente=empresa" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/ABriMdp.png" alt="ntDown" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Banco B.</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 10 (Telegram) -->
+                <a href="https://minhaconta2.cielo.com.br/minha-conta/home" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/vWq9nDM.png" alt="Telegram" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Cielo</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 11 (Telegram) -->
+                <a href="https://tekinf2025.github.io/graficofinanceiro/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/xr2g94s.png" alt="Telegram" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Graf Fin.</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 12 (Telegram) -->
+                <a href="https://web.Telegram.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Telegram" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Telegram</h3>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Vendas Section -->
+        <section class="mb-8">
+            <h2 class="text-xl font-bold text-gray-200 mb-4 section-title">Vendas</h2>
+            <div class="card-grid">
+                <!-- Card 1 -->
+                <a href="https://web.whatsapp.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Whatsapp" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Whatsapp</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 2 -->
+                <a href="https://web.whatsapp.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Whatsapp" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Whatsapp</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 3 -->
+                <a href="https://web.whatsapp.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Whatsapp" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Whatsapp</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 4 -->
+                <a href="https://web.Gerenciador.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Gerenciador" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Gerenciador</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 5 -->
+                <a href="https://web.Gerenciador.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Gerenciador" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Gerenciador</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 6 -->
+                <a href="https://web.Gerenciador.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Gerenciador" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Gerenciador</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 7 -->
+                <a href="https://web.ntDown.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="ntDown" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">ntDown</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 8 -->
+                <a href="https://web.ntDown.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="ntDown" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">ntDown</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 9 -->
+                <a href="https://web.ntDown.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="ntDown" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">ntDown</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 10 (Telegram) -->
+                <a href="https://web.Telegram.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Telegram" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Telegram</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 11 (Telegram) -->
+                <a href="https://web.Telegram.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Telegram" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Telegram</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 12 (Telegram) -->
+                <a href="https://web.Telegram.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Telegram" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Telegram</h3>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Outros Section -->
+        <section class="mb-8">
+            <h2 class="text-xl font-bold text-gray-200 mb-4 section-title">Outros</h2>
+            <div class="card-grid">
+                <!-- Card 1 -->
+                <a href="https://web.whatsapp.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Whatsapp" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Whatsapp</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 2 -->
+                <a href="https://web.whatsapp.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Whatsapp" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Whatsapp</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 3 -->
+                <a href="https://web.whatsapp.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Whatsapp" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Whatsapp</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 4 -->
+                <a href="https://web.Gerenciador.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Gerenciador" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Gerenciador</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 5 -->
+                <a href="https://web.Gerenciador.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Gerenciador" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Gerenciador</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 6 -->
+                <a href="https://web.Gerenciador.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Gerenciador" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Gerenciador</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 7 -->
+                <a href="https://web.ntDown.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="ntDown" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">ntDown</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 8 -->
+                <a href="https://web.ntDown.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="ntDown" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">ntDown</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 9 -->
+                <a href="https://web.ntDown.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="ntDown" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">ntDown</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 10 (Telegram) -->
+                <a href="https://web.Telegram.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Telegram" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Telegram</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 11 (Telegram) -->
+                <a href="https://web.Telegram.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Telegram" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Telegram</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 12 (Telegram) -->
+                <a href="https://web.Telegram.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                    <div class="p-2 flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/0SsOR2N.png" alt="Telegram" class="card-icon mb-1">
+                        <h3 class="text-xs font-semibold text-gray-200">Telegram</h3>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="mb-8 bg-gray-900 rounded-lg p-6">
+            <h2 class="text-xl font-bold mb-4 section-title">Entre em Contato</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <a href="https://wa.me/5521976286027" target="_blank" class="contact-button flex items-center bg-gray-800 hover:bg-gray-700 p-3 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="#4fd1c5" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                    </svg>
+                    <div>
+                        <h3 class="font-semibold text-sm">WhatsApp</h3>
+                        <p class="text-xs text-gray-400">(21) 97628-6027</p>
+                    </div>
+                    <span class="ml-auto bg-gray-700 text-cyan-300 px-2 py-1 rounded text-xs font-medium">Enviar mensagem</span>
+                </a>
+                
+                <a href="mailto:tekin.formatica@hotmail.com" class="contact-button flex items-center bg-gray-800 hover:bg-gray-700 p-3 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="#4fd1c5">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <div>
+                        <h3 class="font-semibold text-sm">Email</h3>
+                        <p class="text-xs text-gray-400">tekin.formatica@hotmail.com</p>
+                    </div>
+                    <span class="ml-auto bg-gray-700 text-cyan-300 px-2 py-1 rounded text-xs font-medium">Enviar e-mail</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col items-center">
+                <div class="flex items-center mb-3">
+                    <div class="mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="#4fd1c5">
+                            <path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold">Tekinformática</h1>
+                        <p class="text-xs text-cyan-200">Soluções em Tecnologia</p>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-400">© 2011 Tekinformática - Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'947848747579ca5d',t:'MTc0ODU0NTczNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
