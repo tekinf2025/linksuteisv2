@@ -3,755 +3,1409 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Links Úteis - Tekinformática</title>
-    <link rel="icon" href="https://i.imgur.com/GXXvAOp.png">
+    <title>M3U Manager</title>
+    <link rel="icon" href="https://i.imgur.com/c0lg3vq.png">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
         }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
         }
-        
-        .card {
-            transition: all 0.3s ease;
-            background-color: #1e1e1e;
-            width: 100%;
-            max-width: 90px; /* Reduzindo a largura máxima dos cards */
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
         }
-        
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
-            background-color: #2d2d2d;
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #1e40af;
+            border-radius: 10px;
         }
-        
-        .section-title {
-            position: relative;
-            display: inline-block;
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #153e75;
         }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background: #4fd1c5;
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
         }
-        
-        .contact-button {
-            transition: all 0.3s ease;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        
-        .contact-button:hover {
-            transform: scale(1.03);
+        .slide-in {
+            animation: slideIn 0.3s ease-in-out;
         }
-        
-        .card-grid {
+        @keyframes slideIn {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .truncate-url {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            display: block;
+        }
+        .card-view {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 16px;
         }
-        
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
+        .list-view .content-item {
+            display: grid;
+            grid-template-columns: 40px 1fr 120px 120px 120px;
+            gap: 8px;
+            align-items: center;
+        }
+        .detail-view .content-item {
+            display: grid;
+            grid-template-columns: 40px 80px 1fr 150px 150px 150px;
+            gap: 8px;
+            align-items: center;
         }
     </style>
 </head>
-<body>
-    <!-- Header -->
-    <header class="gradient-bg text-white py-4">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="flex items-center mb-3 md:mb-0">
-                    <div class="mr-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="#4fd1c5">
-                            <path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold">Tekinformática</h1>
-                        <p class="text-xs text-cyan-200">Soluções em Tecnologia</p>
-                    </div>
+<body class="bg-gray-50">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#1e40af]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    <h1 class="ml-2 text-xl font-bold text-gray-900">TEKINFORMÁTICA</h1>
                 </div>
                 <div>
-                    <h2 class="text-lg font-semibold">Links Úteis</h2>
+                    <span class="text-sm text-gray-600">Gerenciador de Conteúdos M3U</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <!-- Dashboard -->
+                <div class="bg-white rounded-lg shadow-sm p-6 mb-6 fade-in">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Dashboard</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-sm font-medium text-gray-700">Total de Conteúdos</h3>
+                                <span class="text-[#1e40af] font-semibold text-lg" id="total-content-count">0</span>
+                            </div>
+                            <div class="h-40 relative">
+                                <canvas id="total-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-sm font-medium text-gray-700">Conteúdos por Categoria</h3>
+                                <span class="text-[#1e40af] font-semibold text-lg" id="category-count">0</span>
+                            </div>
+                            <div class="h-40 relative">
+                                <canvas id="category-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-sm font-medium text-gray-700">Conteúdos Selecionados</h3>
+                                <span class="text-[#1e40af] font-semibold text-lg" id="selected-count">0</span>
+                            </div>
+                            <div class="h-40 relative">
+                                <canvas id="selected-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Import/Export Section -->
+                <div class="bg-white rounded-lg shadow-sm p-6 mb-6 slide-in">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Importar / Exportar</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-sm font-medium text-gray-700 mb-2">Importar Conteúdos</h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Arquivo .m3u</label>
+                                    <div class="flex">
+                                        <input type="file" id="file-input" accept=".m3u" class="hidden">
+                                        <label for="file-input" class="flex-grow px-4 py-2 bg-gray-100 border border-gray-300 rounded-l-md text-sm text-gray-700 cursor-pointer hover:bg-gray-200 transition">
+                                            Selecionar arquivo
+                                        </label>
+                                        <button id="import-file-btn" class="px-4 py-2 bg-[#1e40af] text-white rounded-r-md hover:bg-[#153e75] transition">
+                                            Importar
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">URL</label>
+                                    <div class="flex">
+                                        <input type="url" id="url-input" placeholder="https://exemplo.com/lista.m3u" class="flex-grow px-4 py-2 border border-gray-300 rounded-l-md text-sm focus:outline-none focus:ring-2 focus:ring-[#1e40af]">
+                                        <button id="import-url-btn" class="px-4 py-2 bg-[#1e40af] text-white rounded-r-md hover:bg-[#153e75] transition">
+                                            Importar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-medium text-gray-700 mb-2">Exportar Conteúdos</h3>
+                            <div class="space-y-3">
+                                <button id="export-selected-btn" class="w-full px-4 py-2 bg-[#1e40af] text-white rounded-md hover:bg-[#153e75] transition flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    </svg>
+                                    Exportar Selecionados (.m3u)
+                                </button>
+                                <button id="copy-selected-btn" class="w-full px-4 py-2 bg-gray-100 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-200 transition flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                    </svg>
+                                    Copiar Selecionados
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="bg-white rounded-lg shadow-sm mb-6">
+                    <div class="border-b border-gray-200">
+                        <nav class="flex -mb-px">
+                            <button id="tab-library" class="tab-button active px-6 py-3 border-b-2 border-[#1e40af] text-[#1e40af] font-medium">
+                                Biblioteca de Conteúdos
+                            </button>
+                            <button id="tab-imported" class="tab-button px-6 py-3 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium">
+                                Links Importados
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Content Section -->
+                <div id="content-library" class="tab-content active">
+                    <!-- Filters -->
+                    <div class="bg-white rounded-lg shadow-sm p-6 mb-6 slide-in">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h2 class="text-lg font-semibold text-gray-800">Biblioteca de Conteúdos</h2>
+                            <div class="flex space-x-2 mt-2 md:mt-0">
+                                <button id="view-list" class="view-button active p-2 rounded-md bg-gray-100 hover:bg-gray-200 transition">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                                    </svg>
+                                </button>
+                                <button id="view-detail" class="view-button p-2 rounded-md bg-gray-100 hover:bg-gray-200 transition">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h7" />
+                                    </svg>
+                                </button>
+                                <button id="view-card" class="view-button p-2 rounded-md bg-gray-100 hover:bg-gray-200 transition">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                            <div>
+                                <label class="block text-sm text-gray-600 mb-1">Nome</label>
+                                <input type="text" id="filter-name" class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#1e40af]" placeholder="Filtrar por nome">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-600 mb-1">Logo</label>
+                                <input type="text" id="filter-logo" class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#1e40af]" placeholder="Filtrar por logo">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-600 mb-1">Categoria</label>
+                                <select id="filter-category" class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#1e40af]">
+                                    <option value="">Todas as categorias</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-600 mb-1">Subcategoria</label>
+                                <select id="filter-subcategory" class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#1e40af]">
+                                    <option value="">Todas as subcategorias</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-sm text-gray-600 mb-1">Ordenar por</label>
+                                <select id="sort-by" class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#1e40af]">
+                                    <option value="name-asc">Nome (A-Z)</option>
+                                    <option value="name-desc">Nome (Z-A)</option>
+                                    <option value="group">Grupo</option>
+                                    <option value="category">Categoria</option>
+                                </select>
+                            </div>
+                            <div class="flex items-end space-x-2">
+                                <button id="select-all-btn" class="px-4 py-2 bg-[#1e40af] text-white rounded-md hover:bg-[#153e75] transition">
+                                    Selecionar Todos
+                                </button>
+                                <button id="deselect-all-btn" class="px-4 py-2 bg-gray-100 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-200 transition">
+                                    Desmarcar Todos
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2">
+                            <button id="edit-selected-btn" class="px-4 py-2 bg-amber-500 text-white rounded-md hover:bg-amber-600 transition flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                                Editar Selecionados
+                            </button>
+                            <button id="delete-selected-btn" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                                Excluir Selecionados
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Content List -->
+                    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                        <div id="content-list" class="list-view custom-scrollbar overflow-x-auto">
+                            <div class="content-item font-medium text-gray-700 border-b pb-2 mb-2">
+                                <div></div>
+                                <div>Nome</div>
+                                <div>Categoria</div>
+                                <div>Grupo</div>
+                                <div>Ações</div>
+                            </div>
+                            <div id="content-items" class="space-y-2">
+                                <!-- Content items will be populated here -->
+                                <div class="text-center py-8 text-gray-500">
+                                    Nenhum conteúdo carregado. Importe um arquivo .m3u ou URL para começar.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content-imported" class="tab-content hidden">
+                    <!-- Imported Links -->
+                    <div class="bg-white rounded-lg shadow-sm p-6 mb-6 slide-in">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">Links Importados</h2>
+                        <div class="overflow-x-auto custom-scrollbar">
+                            <table class="min-w-full">
+                                <thead>
+                                    <tr class="bg-gray-50">
+                                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Nome</th>
+                                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">URL do Conteúdo</th>
+                                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">URL do Logo</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="imported-links">
+                                    <!-- Imported links will be populated here -->
+                                    <tr>
+                                        <td colspan="3" class="text-center py-8 text-gray-500">
+                                            Nenhum conteúdo selecionado. Selecione itens na Biblioteca para visualizar aqui.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <div class="flex justify-between items-center">
+                    <div class="text-sm text-gray-500">
+                        © 2023 TEKINFORMÁTICA - Gerenciador de Conteúdos M3U
+                    </div>
+                    <div id="status-message" class="text-sm text-gray-600"></div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold text-gray-800">Editar Conteúdos</h3>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div id="edit-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Categoria</label>
+                    <input type="text" id="edit-category" class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#1e40af]">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Grupo</label>
+                    <input type="text" id="edit-group" class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#1e40af]">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Logo URL</label>
+                    <input type="text" id="edit-logo" class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#1e40af]">
+                </div>
+                <div class="pt-4 border-t border-gray-200 flex justify-end space-x-3">
+                    <button id="cancel-edit" class="px-4 py-2 bg-gray-100 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-200 transition">
+                        Cancelar
+                    </button>
+                    <button id="save-edit" class="px-4 py-2 bg-[#1e40af] text-white rounded-md hover:bg-[#153e75] transition">
+                        Salvar Alterações
+                    </button>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 py-6">
-        <!-- Loja Section -->
-        <section class="mb-8">
-            <h2 class="text-xl font-bold text-gray-200 mb-4 section-title">Loja</h2>
-            <div class="card-grid">
-                <!-- Card 1 -->
-                <a href="https://outlook.live.com/mail/0/inbox" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/rSifayU.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Hotmail</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 2 -->
-                <a href="https://web.whatsapp.com" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/b2x6AkR.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Whatsapp</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 3 -->
-                <a href="https://www.appsheet.com/start/c9165fa8-2c94-4524-9aa0-7030605d7e46" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/VazC9e0.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Gerenciador</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 4 -->
-                <a href="https://www.appsheet.com/start/8f01a344-a758-48e9-85eb-e95b4c12dbd6" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/mrmGTvw.png" alt="Gerenciador" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Sistema</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 5 -->
-                <a href="https://escritorio-virtual.sigma.st/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/KnuHpia.png" alt="Gerenciador" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">P2X</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 6 -->
-                <a href="https://3rewfds2qw.p2server.me/login" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/UlasOYT.png" alt="Gerenciador" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">P2 Server</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 7 -->
-                <a href="http://144.126.138.217:25500/login.php" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/31XJN4J.png" alt="ntDown" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">RTV</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 8 -->
-                <a href="https://dashboard.bz/login.php" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/LSmsswL.png" alt="ntDown" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">cPlayer</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 9 -->
-                <a href="https://cms.ntdev.in/login" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/bd9kh1n.png" alt="ntDown" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">ntDown</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 10 (Telegram) -->
-                <a href="https://web.telegram.org/z/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/xGKCOE8.png" alt="Telegram" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Telegram</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 11 (Telegram) -->
-                <a href="https://www.instagram.com/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/vSymemV.png" alt="Telegram" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Instagram</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 12 (Telegram) -->
-                <a href="https://www.appsheet.com/home/apps" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/LGLEQUh.png" alt="Telegram" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">AppSheets</h3>
-                    </div>
-                </a>
-            </div>
-        </section>
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-gray-800 text-white px-6 py-3 rounded-md shadow-lg transform transition-transform duration-300 translate-y-20 opacity-0 flex items-center">
+        <span id="toast-message">Mensagem de notificação</span>
+    </div>
 
-        <!-- Streaming Section -->
-        <section class="mb-8">
-            <h2 class="text-xl font-bold text-gray-200 mb-4 section-title">Streaming</h2>
-            <div class="card-grid">
-                <!-- Card 1 -->
-                <a href="https://studio.youtube.com/channel/UCpYkPHq4sa97EPQxjb-PCsQ/videos/upload?filter=%5B%5D&sort=%7B%22columnType%22%3A%22date%22%2C%22sortOrder%22%3A%22DESCENDING%22%7D" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/1jpsgdO.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Canal</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 2 -->
-                <a href="https://tekinf2025.github.io/videos/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/jDqnGka.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Vídeo App</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 3 -->
-                <a href="https://escritorio-virtual.xyz/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/KnuHpia.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">P2X xyz</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 4 -->
-                <a href="https://p2xloja.com/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/KnuHpia.png" alt="Gerenciador" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">P2x Loja</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 5 -->
-                <a href="https://my.contabo.com/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/WDCTRp3.png" alt="Gerenciador" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Contabo</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 6 -->
-                <a href="https://dash.cloudflare.com/65ec268477ca2432ca13dd342f51957a" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/aQrucbl.png" alt="Gerenciador" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Cloudflare</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 7 -->
-                <a href="https://sites.google.com/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/tr2fCoT.png" alt="ntDown" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Goog Sites</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 8 -->
-                <a href="https://iboproapp.com/manage-playlists/login" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/ZA08eBK.png" alt="ntDown" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Ibo Player</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 9 -->
-                <a href="https://smartone-iptv.com/plugin/smart_one/main_generate" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/I33LB8p.png" alt="ntDown" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Smartone</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 10 (Telegram) -->
-                <a href="https://lazerplay.io/#/upload-playlist" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/YUYekAk.png" alt="Telegram" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Lazer P.</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 11 (Telegram) -->
-                <a href="https://cms.bayip.tv/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/VkCVAMK.png" alt="Telegram" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Bay Tv</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 12 (Telegram) -->
-                <a href="https://edit.duplexplay.com/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/o9XaCEw.png" alt="Telegram" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Duplex P.</h3>
-                    </div>
-                </a>
-            </div>
-        </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // State management
+            const state = {
+                contents: [],
+                filteredContents: [],
+                selectedContents: [],
+                currentView: 'list',
+                currentTab: 'library',
+                editingContents: []
+            };
 
-        <!-- Financeiro Section -->
-        <section class="mb-8">
-            <h2 class="text-xl font-bold text-gray-200 mb-4 section-title">Financeiro</h2>
-            <div class="card-grid">
-                <!-- Card 1 -->
-                <a href="https://www.appsheet.com/start/4294f6da-89c2-4db4-8e25-97e6331fa07c" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/r9D4E6t.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Controle</h3>
-                    </div>
-                </a>
+            // DOM Elements
+            const elements = {
+                totalContentCount: document.getElementById('total-content-count'),
+                categoryCount: document.getElementById('category-count'),
+                selectedCount: document.getElementById('selected-count'),
+                contentItems: document.getElementById('content-items'),
+                importedLinks: document.getElementById('imported-links'),
+                fileInput: document.getElementById('file-input'),
+                urlInput: document.getElementById('url-input'),
+                filterName: document.getElementById('filter-name'),
+                filterLogo: document.getElementById('filter-logo'),
+                filterCategory: document.getElementById('filter-category'),
+                filterSubcategory: document.getElementById('filter-subcategory'),
+                sortBy: document.getElementById('sort-by'),
+                contentList: document.getElementById('content-list'),
+                editModal: document.getElementById('edit-modal'),
+                editCategory: document.getElementById('edit-category'),
+                editGroup: document.getElementById('edit-group'),
+                editLogo: document.getElementById('edit-logo'),
+                statusMessage: document.getElementById('status-message'),
+                toast: document.getElementById('toast'),
+                toastMessage: document.getElementById('toast-message')
+            };
 
-                <!-- Card 2 (Telegram) -->
-                <a href="https://tekinf2025.github.io/graficofinanceiro/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/rDEPGCk.png" alt="Telegram" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Graf Fin.</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 3 -->
-                <a href="https://tekinf2025.github.io/investimentos/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/9qzolpP.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Investim.</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 4 -->
-                <a href="https://www.investidor.b3.com.br/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/3csQ5jQ.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Bolsa V.</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 5 -->
-                <a href="https://app.btgpactual.com/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/qI1YTjQ.png" alt="Gerenciador" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">BTG Pactual</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 6 -->
-                <a href="https://br.tradingview.com/chart/OyNMzTDV/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/oBBv0ge.png" alt="Gerenciador" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">TradingView</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 7 -->
-                <a href="https://br.investing.com/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/AMBHVFe.png" alt="Gerenciador" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Investing</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 8 -->
-                <a href="https://www.tesourodireto.com.br/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/Zx75nlo.png" alt="ntDown" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Tesouro</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 9 -->
-                <a href="https://app.nubank.com.br/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/Wuv0YFe.png" alt="ntDown" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Nu-Bank</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 10 -->
-                <a href="https://autoatendimento.bb.com.br/apf-apj-acesso/#/transacao/acesso-apj/1?tipoCliente=empresa" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/ABriMdp.png" alt="ntDown" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Banco B.</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 11 (Telegram) -->
-                <a href="https://minhaconta2.cielo.com.br/minha-conta/home" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/vWq9nDM.png" alt="Telegram" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Cielo</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 12 (Telegram) -->
-                <a href="https://sites.google.com/view/tekinfosite" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/0Zbohh7.png" alt="Telegram" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Goog Links</h3>
-                    </div>
-                </a>
-            </div>
-        </section>
+            // Charts
+            let totalChart, categoryChart, selectedChart;
 
-        <!-- Vendas Section -->
-        <section class="mb-8">
-            <h2 class="text-xl font-bold text-gray-200 mb-4 section-title">Vendas</h2>
-            <div class="card-grid">
-                <!-- Card 1 -->
-                <a href="https://tekinf2025.github.io/site/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/xGa5Wnk.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Web Site</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 2 -->
-                <a href="https://tekinf2025.github.io/geradordelinks/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/JCNPUoj.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Gerar Zap</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 3 -->
-                <a href="https://tekinf2025.github.io/calculartaxas/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/l9vbUlF.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Calc Taxas</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 4 -->
-                <a href="https://tekinf2025.github.io/linksuteisappsheets/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/0iUdGGv.png" alt="Gerenciador" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Meus Sheet</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 5 -->
-                <a href="https://tekinf2025.github.io/linksuteisxtreamui/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/8Djq2KQ.png" alt="Gerenciador" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Links Ui</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 6 -->
-                <a href="https://github.com/dashboard" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/rVwczmq.png" alt="Gerenciador" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">GitHub</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 7 -->
-                <a href="https://www.canva.com/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/32dxd4m.png" alt="ntDown" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Canva</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 8 -->
-                <a href="https://chatgpt.com/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/GTi5n4r.png" alt="ntDown" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">ChatGPT</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 9 -->
-                <a href="https://imgur.com/upload" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/8S5ZuK0.png" alt="ntDown" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">IMGUR</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 10 (Telegram) -->
-                <a href="https://encurtador.com.br/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/JJxnLYF.png" alt="Telegram" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Encurtar</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 11 (Telegram) -->
-                <a href="https://www.futebolnatv.com.br/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/0ll2lR2.png" alt="Telegram" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Futebol</h3>
-                    </div>
-                </a>
-                
-                <!-- Card 12 (Telegram) -->
-                <a href="http://rootdns.fun/get.php?username=YZbEM2023&password=982STWsht2023&type=m3u_plus&output=mpegts" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/OckU6Pa.png" alt="Telegram" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Lista M3U</h3>
-                    </div>
-                </a>
-            </div>
-        </section>
+            // Initialize charts
+            initCharts();
 
-        <!-- Outros Section -->
-        <section class="mb-8">
-            <h2 class="text-xl font-bold text-gray-200 mb-4 section-title">Outros</h2>
-            <div class="card-grid">
-                <!-- Card 1 -->
-                <a href="https://servidor.sicnet.com.br/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/wyfP0yj.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">SicNet</h3>
-                    </div>
-                </a>
+            // Event Listeners
+            document.getElementById('import-file-btn').addEventListener('click', importFromFile);
+            document.getElementById('import-url-btn').addEventListener('click', importFromUrl);
+            document.getElementById('export-selected-btn').addEventListener('click', exportSelected);
+            document.getElementById('copy-selected-btn').addEventListener('click', copySelected);
+            document.getElementById('select-all-btn').addEventListener('click', selectAll);
+            document.getElementById('deselect-all-btn').addEventListener('click', deselectAll);
+            document.getElementById('edit-selected-btn').addEventListener('click', openEditModal);
+            document.getElementById('delete-selected-btn').addEventListener('click', deleteSelected);
+            document.getElementById('close-modal').addEventListener('click', closeEditModal);
+            document.getElementById('cancel-edit').addEventListener('click', closeEditModal);
+            document.getElementById('save-edit').addEventListener('click', saveEdits);
+
+            // View buttons
+            document.getElementById('view-list').addEventListener('click', () => changeView('list'));
+            document.getElementById('view-detail').addEventListener('click', () => changeView('detail'));
+            document.getElementById('view-card').addEventListener('click', () => changeView('card'));
+
+            // Tab buttons
+            document.getElementById('tab-library').addEventListener('click', () => changeTab('library'));
+            document.getElementById('tab-imported').addEventListener('click', () => changeTab('imported'));
+
+            // Filter inputs
+            elements.filterName.addEventListener('input', applyFilters);
+            elements.filterLogo.addEventListener('input', applyFilters);
+            elements.filterCategory.addEventListener('change', applyFilters);
+            elements.filterSubcategory.addEventListener('change', applyFilters);
+            elements.sortBy.addEventListener('change', applyFilters);
+
+            // Load data from localStorage if available
+            loadFromLocalStorage();
+
+            // Functions
+            function initCharts() {
+                // Total Chart
+                const totalCtx = document.getElementById('total-chart').getContext('2d');
+                totalChart = new Chart(totalCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Total', 'Filtrado'],
+                        datasets: [{
+                            data: [0, 0],
+                            backgroundColor: ['#1e40af', '#93c5fd']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '70%',
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+
+                // Category Chart
+                const categoryCtx = document.getElementById('category-chart').getContext('2d');
+                categoryChart = new Chart(categoryCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            data: [],
+                            backgroundColor: []
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '70%',
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+
+                // Selected Chart
+                const selectedCtx = document.getElementById('selected-chart').getContext('2d');
+                selectedChart = new Chart(selectedCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Selecionado', 'Não Selecionado'],
+                        datasets: [{
+                            data: [0, 0],
+                            backgroundColor: ['#22c55e', '#ef4444']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '70%',
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+
+            function updateCharts() {
+                // Update Total Chart
+                totalChart.data.datasets[0].data = [
+                    state.contents.length,
+                    Math.max(0, state.contents.length - state.filteredContents.length)
+                ];
+                totalChart.update();
+
+                // Update Category Chart
+                const categories = {};
+                state.contents.forEach(content => {
+                    const category = content.category || 'Sem Categoria';
+                    categories[category] = (categories[category] || 0) + 1;
+                });
+
+                const categoryLabels = Object.keys(categories);
+                const categoryData = Object.values(categories);
+                const categoryColors = generateColors(categoryLabels.length);
+
+                categoryChart.data.labels = categoryLabels;
+                categoryChart.data.datasets[0].data = categoryData;
+                categoryChart.data.datasets[0].backgroundColor = categoryColors;
+                categoryChart.update();
+
+                // Update Selected Chart
+                selectedChart.data.datasets[0].data = [
+                    state.selectedContents.length,
+                    state.contents.length - state.selectedContents.length
+                ];
+                selectedChart.update();
+
+                // Update counters
+                elements.totalContentCount.textContent = state.contents.length;
+                elements.categoryCount.textContent = categoryLabels.length;
+                elements.selectedCount.textContent = state.selectedContents.length;
+            }
+
+            function generateColors(count) {
+                const colors = [];
+                const baseColors = [
+                    '#1e40af', '#3b82f6', '#60a5fa', '#93c5fd', '#bfdbfe',
+                    '#22c55e', '#4ade80', '#86efac', '#bbf7d0',
+                    '#f59e0b', '#fbbf24', '#fcd34d', '#fef3c7'
+                ];
+
+                for (let i = 0; i < count; i++) {
+                    colors.push(baseColors[i % baseColors.length]);
+                }
+
+                return colors;
+            }
+
+            function parseM3U(content) {
+                const lines = content.split('\n');
+                const items = [];
+                let currentItem = null;
+
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    
+                    if (line.startsWith('#EXTINF:')) {
+                        // Parse attributes
+                        currentItem = {
+                            name: '',
+                            logo: '',
+                            category: '',
+                            group: '',
+                            url: '',
+                            selected: false,
+                            id: Date.now() + Math.random().toString(36).substring(2, 9)
+                        };
+
+                        // Extract tvg-name, tvg-logo, group-title
+                        const nameMatch = line.match(/tvg-name="([^"]*)"/);
+                        const logoMatch = line.match(/tvg-logo="([^"]*)"/);
+                        const groupMatch = line.match(/group-title="([^"]*)"/);
+
+                        if (nameMatch) currentItem.name = nameMatch[1];
+                        if (logoMatch) currentItem.logo = logoMatch[1];
+                        if (groupMatch) {
+                            currentItem.category = groupMatch[1];
+                            currentItem.group = groupMatch[1];
+                        }
+
+                        // Extract display name (after the comma)
+                        const commaIndex = line.lastIndexOf(',');
+                        if (commaIndex !== -1 && !currentItem.name) {
+                            currentItem.name = line.substring(commaIndex + 1).trim();
+                        }
+                    } else if (line && !line.startsWith('#') && currentItem) {
+                        // This is the URL
+                        currentItem.url = line;
+                        items.push(currentItem);
+                        currentItem = null;
+                    }
+                }
+
+                return items;
+            }
+
+            function importFromFile() {
+                const file = elements.fileInput.files[0];
+                if (!file) {
+                    showToast('Por favor, selecione um arquivo .m3u');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const content = e.target.result;
+                    const newItems = parseM3U(content);
+                    
+                    if (newItems.length > 0) {
+                        state.contents = [...state.contents, ...newItems];
+                        saveToLocalStorage();
+                        updateFilters();
+                        applyFilters();
+                        showToast(`${newItems.length} conteúdos importados com sucesso`);
+                    } else {
+                        showToast('Nenhum conteúdo válido encontrado no arquivo');
+                    }
+                };
+                reader.readAsText(file);
+            }
+
+            function importFromUrl() {
+                const url = elements.urlInput.value.trim();
+                if (!url) {
+                    showToast('Por favor, insira uma URL válida');
+                    return;
+                }
+
+                showToast('Importando conteúdos da URL...');
                 
-                <!-- Card 2 -->
-                <a href="https://meu.olaisaac.io/home" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/SlB9nC3.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">ômega</h3>
-                    </div>
-                </a>
+                // Using a CORS proxy for demonstration
+                // In a real application, you would handle this server-side
+                fetch(`https://cors-anywhere.herokuapp.com/${url}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Falha ao acessar a URL');
+                        }
+                        return response.text();
+                    })
+                    .then(content => {
+                        const newItems = parseM3U(content);
+                        
+                        if (newItems.length > 0) {
+                            state.contents = [...state.contents, ...newItems];
+                            saveToLocalStorage();
+                            updateFilters();
+                            applyFilters();
+                            showToast(`${newItems.length} conteúdos importados com sucesso`);
+                        } else {
+                            showToast('Nenhum conteúdo válido encontrado na URL');
+                        }
+                    })
+                    .catch(error => {
+                        showToast(`Erro ao importar: ${error.message}`);
+                    });
+            }
+
+            function exportSelected() {
+                if (state.selectedContents.length === 0) {
+                    showToast('Nenhum conteúdo selecionado para exportar');
+                    return;
+                }
+
+                let m3uContent = '#EXTM3U\n';
                 
-                <!-- Card 3 -->
-                <a href="https://sso.acesso.gov.br/login" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/AilyyuH.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">MEUGOV</h3>
-                    </div>
-                </a>
+                state.selectedContents.forEach(content => {
+                    m3uContent += `#EXTINF:-1 tvg-name="${content.name}" tvg-logo="${content.logo}" group-title="${content.category}", ${content.name}\n`;
+                    m3uContent += `${content.url}\n`;
+                });
+
+                const blob = new Blob([m3uContent], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'conteudos_exportados.m3u';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                showToast(`${state.selectedContents.length} conteúdos exportados com sucesso`);
+            }
+
+            
+            
+            
+            
+            function copySelected() {
+    if (state.selectedContents.length === 0) {
+        showToast('Nenhum conteúdo selecionado para copiar');
+        return;
+    }
+
+    const sortBy = elements.sortBy.value;
+    const contentsToCopy = [...state.selectedContents];
+
+    function extractEpisodeParts(name) {
+        const match = name.match(/S(\d+)E(\d+)/i);
+        if (match) {
+            return {
+                season: parseInt(match[1], 10),
+                episode: parseInt(match[2], 10)
+            };
+        }
+        return null;
+    }
+
+    switch (sortBy) {
+        case 'name-asc':
+        case 'name-desc':
+            contentsToCopy.sort((a, b) => {
+                const aEp = extractEpisodeParts(a.name);
+                const bEp = extractEpisodeParts(b.name);
+                if (aEp && bEp) {
+                    if (aEp.season !== bEp.season) {
+                        return aEp.season - bEp.season;
+                    }
+                    return aEp.episode - bEp.episode;
+                }
+                const cmp = a.name.localeCompare(b.name);
+                return sortBy === 'name-desc' ? -cmp : cmp;
+            });
+            break;
+        case 'group':
+            contentsToCopy.sort((a, b) => {
+                const groupA = a.group || '';
+                const groupB = b.group || '';
+                return groupA.localeCompare(groupB) || a.name.localeCompare(b.name);
+            });
+            break;
+        case 'category':
+            contentsToCopy.sort((a, b) => {
+                const catA = a.category || '';
+                const catB = b.category || '';
+                return catA.localeCompare(catB) || a.name.localeCompare(b.name);
+            });
+            break;
+    }
+
+    let m3uContent = '#EXTM3U\n';
+    contentsToCopy.forEach(content => {
+        m3uContent += `#EXTINF:-1 tvg-name="${content.name}" tvg-logo="${content.logo}" group-title="${content.category}", ${content.name}\n`;
+        m3uContent += `${content.url}\n`;
+    });
+
+    navigator.clipboard.writeText(m3uContent)
+        .then(() => {
+            showToast(`${contentsToCopy.length} conteúdos copiados para a área de transferência`);
+        })
+        .catch(err => {
+            showToast('Erro ao copiar para a área de transferência');
+            console.error('Erro ao copiar: ', err);
+        });
+}
+
+
+
+
+            function selectAll() {
+                state.filteredContents.forEach(content => {
+                    const index = state.contents.findIndex(c => c.id === content.id);
+                    if (index !== -1) {
+                        state.contents[index].selected = true;
+                    }
+                });
                 
-                <!-- Card 4 -->
-                <a href="https://www.reclameaqui.com.br/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/KAWu3hr.png" alt="Gerenciador" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Rec. Aqui</h3>
-                    </div>
-                </a>
+                state.selectedContents = state.contents.filter(content => content.selected);
+                saveToLocalStorage();
+                renderContents();
+                renderImportedLinks();
+                updateCharts();
+                showToast(`${state.filteredContents.length} conteúdos selecionados`);
+            }
+
+            function deselectAll() {
+                state.contents.forEach(content => {
+                    content.selected = false;
+                });
                 
-                <!-- Card 5 -->
-                <a href="https://myaccount.mercadolivre.com.br/my_purchases/list#nav-header" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/79lxS1u.png" alt="Gerenciador" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Merc Livre</h3>
-                    </div>
-                </a>
+                state.selectedContents = [];
+                saveToLocalStorage();
+                renderContents();
+                renderImportedLinks();
+                updateCharts();
+                showToast('Todos os conteúdos desmarcados');
+            }
+
+            function toggleSelection(id) {
+                const index = state.contents.findIndex(content => content.id === id);
                 
-                <!-- Card 6 -->
-                <a href="https://www.aliexpress.com/p/order/index.html?spm=a2g0o.home.headerAcount.2.6c171c91xYAWcT" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/irNwgsi.png" alt="Gerenciador" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Ali Exp</h3>
-                    </div>
-                </a>
+                if (index !== -1) {
+                    state.contents[index].selected = !state.contents[index].selected;
+                    
+                    if (state.contents[index].selected) {
+                        state.selectedContents.push(state.contents[index]);
+                    } else {
+                        state.selectedContents = state.selectedContents.filter(content => content.id !== id);
+                    }
+                    
+                    saveToLocalStorage();
+                    renderContents();
+                    renderImportedLinks();
+                    updateCharts();
+                }
+            }
+
+            function openEditModal() {
+                state.editingContents = state.selectedContents;
                 
-                <!-- Card 7 -->
-                <a href="https://www2.correios.com.br/sistemas/rastreamento/default.cfm" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/CzLIjiJ.png" alt="ntDown" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Rastreio</h3>
-                    </div>
-                </a>
+                if (state.editingContents.length === 0) {
+                    showToast('Nenhum conteúdo selecionado para editar');
+                    return;
+                }
+
+                // If all selected items have the same category/group/logo, pre-fill the form
+                const firstItem = state.editingContents[0];
+                const allSameCategory = state.editingContents.every(item => item.category === firstItem.category);
+                const allSameGroup = state.editingContents.every(item => item.group === firstItem.group);
+                const allSameLogo = state.editingContents.every(item => item.logo === firstItem.logo);
+
+                elements.editCategory.value = allSameCategory ? firstItem.category : '';
+                elements.editGroup.value = allSameGroup ? firstItem.group : '';
+                elements.editLogo.value = allSameLogo ? firstItem.logo : '';
+
+                elements.editModal.classList.remove('hidden');
+            }
+
+            function closeEditModal() {
+                elements.editModal.classList.add('hidden');
+                state.editingContents = [];
+            }
+
+            function saveEdits() {
+                if (state.editingContents.length === 0) {
+                    closeEditModal();
+                    return;
+                }
+
+                const newCategory = elements.editCategory.value.trim();
+                const newGroup = elements.editGroup.value.trim();
+                const newLogo = elements.editLogo.value.trim();
+
+                state.editingContents.forEach(editingContent => {
+                    const index = state.contents.findIndex(content => content.id === editingContent.id);
+                    
+                    if (index !== -1) {
+                        if (newCategory) state.contents[index].category = newCategory;
+                        if (newGroup) state.contents[index].group = newGroup;
+                        if (newLogo) state.contents[index].logo = newLogo;
+                    }
+                });
+
+                saveToLocalStorage();
+                updateFilters();
+                applyFilters();
+                closeEditModal();
+                showToast(`${state.editingContents.length} conteúdos atualizados com sucesso`);
+            }
+
+            function deleteSelected() {
+                if (state.selectedContents.length === 0) {
+                    showToast('Nenhum conteúdo selecionado para excluir');
+                    return;
+                }
+
+                const count = state.selectedContents.length;
+                const selectedIds = state.selectedContents.map(content => content.id);
                 
-                <!-- Card 8 -->
-                <a href="https://www.enel.com.br/pt/Para_Voce.html" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/86vRabF.png" alt="ntDown" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Enel 2ª v</h3>
-                    </div>
-                </a>
+                state.contents = state.contents.filter(content => !selectedIds.includes(content.id));
+                state.selectedContents = [];
                 
-                <!-- Card 9 -->
-                <a href="https://www.calendario.com.br/feriados-duque_de_caxias-rj.php" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/QgDFzX5.png" alt="ntDown" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Feriados</h3>
-                    </div>
-                </a>
+                saveToLocalStorage();
+                updateFilters();
+                applyFilters();
+                showToast(`${count} conteúdos excluídos com sucesso`);
+            }
+
+            function updateFilters() {
+                // Update category filter
+                const categories = new Set();
+                const subcategories = new Set();
                 
-                <!-- Card 10 -->
-                <a href="https://tekinf2025.github.io/editorm3u/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/3Dz8KBM.png" alt="Telegram" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">M3U Editor</h3>
-                    </div>
-                </a>
+                state.contents.forEach(content => {
+                    if (content.category) {
+                        categories.add(content.category);
+                    }
+                    if (content.group && content.group !== content.category) {
+                        subcategories.add(content.group);
+                    }
+                });
+
+                // Clear existing options
+                elements.filterCategory.innerHTML = '<option value="">Todas as categorias</option>';
+                elements.filterSubcategory.innerHTML = '<option value="">Todas as subcategorias</option>';
+
+                // Add new options
+                categories.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category;
+                    option.textContent = category;
+                    elements.filterCategory.appendChild(option);
+                });
+
+                subcategories.forEach(subcategory => {
+                    const option = document.createElement('option');
+                    option.value = subcategory;
+                    option.textContent = subcategory;
+                    elements.filterSubcategory.appendChild(option);
+                });
+            }
+
+            function applyFilters() {
+                const nameFilter = elements.filterName.value.toLowerCase();
+                const logoFilter = elements.filterLogo.value.toLowerCase();
+                const categoryFilter = elements.filterCategory.value;
+                const subcategoryFilter = elements.filterSubcategory.value;
+                const sortBy = elements.sortBy.value;
+
+                // Apply filters
+                state.filteredContents = state.contents.filter(content => {
+                    const nameMatch = content.name.toLowerCase().includes(nameFilter);
+                    const logoMatch = !logoFilter || (content.logo && content.logo.toLowerCase().includes(logoFilter));
+                    const categoryMatch = !categoryFilter || content.category === categoryFilter;
+                    const subcategoryMatch = !subcategoryFilter || content.group === subcategoryFilter;
+
+                    return nameMatch && logoMatch && categoryMatch && subcategoryMatch;
+                });
+
+                // Apply sorting
+                switch (sortBy) {
+                    case 'name-asc':
+                        state.filteredContents.sort((a, b) => a.name.localeCompare(b.name));
+                        break;
+                    case 'name-desc':
+                        state.filteredContents.sort((a, b) => b.name.localeCompare(a.name));
+                        break;
+                    case 'group':
+                        state.filteredContents.sort((a, b) => {
+                            const groupA = a.group || '';
+                            const groupB = b.group || '';
+                            return groupA.localeCompare(groupB) || a.name.localeCompare(b.name);
+                        });
+                        break;
+                    case 'category':
+                        state.filteredContents.sort((a, b) => {
+                            const catA = a.category || '';
+                            const catB = b.category || '';
+                            return catA.localeCompare(catB) || a.name.localeCompare(b.name);
+                        });
+                        break;
+                }
+
+                renderContents();
+                updateCharts();
+            }
+
+            function renderContents() {
+                if (state.filteredContents.length === 0) {
+                    elements.contentItems.innerHTML = `
+                        <div class="text-center py-8 text-gray-500">
+                            ${state.contents.length > 0 ? 'Nenhum conteúdo corresponde aos filtros aplicados.' : 'Nenhum conteúdo carregado. Importe um arquivo .m3u ou URL para começar.'}
+                        </div>
+                    `;
+                    return;
+                }
+
+                elements.contentItems.innerHTML = '';
+
+                // Sort by episode number if possible (for proper sequence)
+                const sortedContents = [...state.filteredContents].sort((a, b) => {
+                    // Try to extract episode numbers (e.g., S01E01)
+                    const epRegex = /S(\d+)E(\d+)/i;
+                    const matchA = a.name.match(epRegex);
+                    const matchB = b.name.match(epRegex);
+                    
+                    if (matchA && matchB) {
+                        const seasonA = parseInt(matchA[1]);
+                        const seasonB = parseInt(matchB[1]);
+                        
+                        if (seasonA !== seasonB) {
+                            return seasonA - seasonB;
+                        }
+                        
+                        const episodeA = parseInt(matchA[2]);
+                        const episodeB = parseInt(matchB[2]);
+                        return episodeA - episodeB;
+                    }
+                    
+                    return 0; // Keep original order if no episode pattern found
+                });
+
+                switch (state.currentView) {
+                    case 'list':
+                        renderListView(sortedContents);
+                        break;
+                    case 'detail':
+                        renderDetailView(sortedContents);
+                        break;
+                    case 'card':
+                        renderCardView(sortedContents);
+                        break;
+                }
+            }
+
+            function renderListView(contents) {
+                elements.contentList.className = 'list-view custom-scrollbar overflow-x-auto';
                 
-                <!-- Card 11 -->
-                <a href="https://app--controle-de-cartoes-c17b179b.base44.app/Vencimentos" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/qS4jRpx.png" alt="Telegram" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Cartões tekin.conta5</h3>
-                    </div>
-                </a>
+                contents.forEach(content => {
+                    const item = document.createElement('div');
+                    item.className = 'content-item py-2 border-b border-gray-100 hover:bg-gray-50 transition';
+                    
+                    item.innerHTML = `
+                        <div>
+                            <input type="checkbox" class="w-5 h-5 rounded border-gray-300 text-[#1e40af] focus:ring-[#1e40af]" 
+                                ${content.selected ? 'checked' : ''} data-id="${content.id}">
+                        </div>
+                        <div class="flex items-center">
+                            ${content.logo ? `<img src="${content.logo}" alt="Logo" class="w-6 h-6 mr-2 object-contain">` : ''}
+                            <span class="truncate">${content.name}</span>
+                        </div>
+                        <div class="truncate">${content.category || '-'}</div>
+                        <div class="truncate">${content.group || '-'}</div>
+                        <div class="flex space-x-1">
+                            <button class="copy-btn p-1 text-gray-500 hover:text-[#1e40af]" data-id="${content.id}" title="Copiar">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button>
+                            <button class="edit-btn p-1 text-gray-500 hover:text-amber-500" data-id="${content.id}" title="Editar">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                            </button>
+                            <button class="delete-btn p-1 text-gray-500 hover:text-red-500" data-id="${content.id}" title="Excluir">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    `;
+                    
+                    elements.contentItems.appendChild(item);
+                    
+                    // Add event listeners
+                    const checkbox = item.querySelector('input[type="checkbox"]');
+                    checkbox.addEventListener('change', () => toggleSelection(content.id));
+                    
+                    const copyBtn = item.querySelector('.copy-btn');
+                    copyBtn.addEventListener('click', () => copyContentToClipboard(content));
+                    
+                    const editBtn = item.querySelector('.edit-btn');
+                    editBtn.addEventListener('click', () => editSingleContent(content));
+                    
+                    const deleteBtn = item.querySelector('.delete-btn');
+                    deleteBtn.addEventListener('click', () => deleteSingleContent(content.id));
+                });
+            }
+
+            function renderDetailView(contents) {
+                elements.contentList.className = 'detail-view custom-scrollbar overflow-x-auto';
                 
-                <!-- Card 12 -->
-                <a href="https://app--gerenciador-de-clientes-v30-3dd6e838.base44.app" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/OFKsOnl.png" alt="Telegram" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Gerenciador tekin.cli2024</h3>
-                    </div>
-                </a>
-            </div>
-        </section>
+                contents.forEach(content => {
+                    const item = document.createElement('div');
+                    item.className = 'content-item py-2 border-b border-gray-100 hover:bg-gray-50 transition';
+                    
+                    item.innerHTML = `
+                        <div>
+                            <input type="checkbox" class="w-5 h-5 rounded border-gray-300 text-[#1e40af] focus:ring-[#1e40af]" 
+                                ${content.selected ? 'checked' : ''} data-id="${content.id}">
+                        </div>
+                        <div class="flex justify-center">
+                            ${content.logo ? `<img src="${content.logo}" alt="Logo" class="w-10 h-10 object-contain">` : 
+                            '<div class="w-10 h-10 bg-gray-200 rounded-md flex items-center justify-center text-gray-400">N/A</div>'}
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-medium">${content.name}</span>
+                            <span class="text-xs text-gray-500 truncate-url">${content.url}</span>
+                        </div>
+                        <div class="truncate">${content.category || '-'}</div>
+                        <div class="truncate">${content.group || '-'}</div>
+                        <div class="flex space-x-1">
+                            <button class="copy-btn p-1 text-gray-500 hover:text-[#1e40af]" data-id="${content.id}" title="Copiar">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </button>
+                            <button class="edit-btn p-1 text-gray-500 hover:text-amber-500" data-id="${content.id}" title="Editar">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                            </button>
+                            <button class="delete-btn p-1 text-gray-500 hover:text-red-500" data-id="${content.id}" title="Excluir">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    `;
+                    
+                    elements.contentItems.appendChild(item);
+                    
+                    // Add event listeners
+                    const checkbox = item.querySelector('input[type="checkbox"]');
+                    checkbox.addEventListener('change', () => toggleSelection(content.id));
+                    
+                    const copyBtn = item.querySelector('.copy-btn');
+                    copyBtn.addEventListener('click', () => copyContentToClipboard(content));
+                    
+                    const editBtn = item.querySelector('.edit-btn');
+                    editBtn.addEventListener('click', () => editSingleContent(content));
+                    
+                    const deleteBtn = item.querySelector('.delete-btn');
+                    deleteBtn.addEventListener('click', () => deleteSingleContent(content.id));
+                });
+            }
 
-        <!-- Outros Section -->
-        <section class="mb-8">
-            <h2 class="text-xl font-bold text-gray-200 mb-4 section-title">Outros II</h2>
-            <div class="card-grid">
-                <!-- Card 1 -->
-                <a href="https://tekinf2025.github.io/jogosdodia" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/0ll2lR2.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Tabela</h3>
-                    </div>
-                </a>
-
-                 <!-- Card 2 -->
-                <a href="URL-AQUI" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/UBoq70c.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">----</h3>
-                    </div>
-                </a>
-
-                 <!-- Card 3 -->
-                <a href="URL-AQUI" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/UBoq70c.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">----</h3>
-                    </div>
-                </a>
-
-                 <!-- Card 4 -->
-                <a href="URL-AQUI" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/UBoq70c.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">----</h3>
-                    </div>
-                </a>
-
-                 <!-- Card 5 -->
-                <a href="URL-AQUI" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/UBoq70c.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">----</h3>
-                    </div>
-                </a>
-
-                 <!-- Card 6 -->
-                <a href="URL-AQUI" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/UBoq70c.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">----</h3>
-                    </div>
-                </a>
-
-                 <!-- Card 7 -->
-                <a href="URL-AQUI" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/UBoq70c.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">----</h3>
-                    </div>
-                </a>
-
-                 <!-- Card 8 -->
-                <a href="https://app--m3-u-editor-xtream-447f367a.base44.app" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/vjumSfS.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">M3u 2025 tekin.conta2</h3>
-                    </div>
-                </a>
-
-                 <!-- Card 9 -->
-                <a href="https://app--investimentos-financeiro-62ee07ac.base44.app" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/CoWFEJ7.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Investi tekin.conta4</h3>
-                    </div>
-                </a>
-
-                 <!-- Card 10 -->
-                <a href="https://app.base44.com/" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/eFmikNI.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Base44.com</h3>
-                    </div>
-                </a>
-
-                 <!-- Card 11 -->
-                <a href="https://app--controle-financeiro-v1-62edcd52.base44.app" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/Qda3lfL.png" alt="Whatsapp" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Controle tekin.conta3</h3>
-                    </div>
-                </a>
-
-                <!-- Card 12 -->
-                <a href="https://app--sistema-da-loja-v10-926959ef.base44.app" target="_blank" class="card rounded-lg shadow-md overflow-hidden hover:shadow-lg">
-                    <div class="p-2 flex flex-col items-center text-center">
-                        <img src="https://i.imgur.com/prfHuiM.png" alt="Telegram" class="card-icon mb-1">
-                        <h3 class="text-xs font-semibold text-gray-200">Sistema tekin.2013</h3>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="mb-8 bg-gray-900 rounded-lg p-6">
-            <h2 class="text-xl font-bold mb-4 section-title">Entre em Contato</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <a href="https://wa.me/5521976286027" target="_blank" class="contact-button flex items-center bg-gray-800 hover:bg-gray-700 p-3 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="#4fd1c5" viewBox="0 0 24 24">
-                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-                    </svg>
-                    <div>
-                        <h3 class="font-semibold text-sm">WhatsApp</h3>
-                        <p class="text-xs text-gray-400">(21) 97628-6027</p>
-                    </div>
-                    <span class="ml-auto bg-gray-700 text-cyan-300 px-2 py-1 rounded text-xs font-medium">Enviar</span>
-                </a>
+            function renderCardView(contents) {
+                elements.contentList.className = 'card-view';
                 
-                <a href="mailto:tekin.formatica@hotmail.com" class="contact-button flex items-center bg-gray-800 hover:bg-gray-700 p-3 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="#4fd1c5">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    <div>
-                        <h3 class="font-semibold text-sm">Email</h3>
-                        <p class="text-xs text-gray-400">tekinformatica</p>
-                    </div>
-                    <span class="ml-auto bg-gray-700 text-cyan-300 px-2 py-1 rounded text-xs font-medium">Enviar</span>
-                </a>
-            </div>
-        </section>
-    </main>
+                contents.forEach(content => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 hover:shadow-md transition';
+                    
+                    card.innerHTML = `
+                        <div class="relative">
+                            <div class="absolute top-2 left-2">
+                                <input type="checkbox" class="w-5 h-5 rounded border-gray-300 text-[#1e40af] focus:ring-[#1e40af]" 
+                                    ${content.selected ? 'checked' : ''} data-id="${content.id}">
+                            </div>
+                            <div class="h-32 bg-gray-100 flex items-center justify-center">
+                                ${content.logo ? 
+                                    `<img src="${content.logo}" alt="Logo" class="max-h-full max-w-full object-contain">` : 
+                                    `<div class="text-4xl text-gray-300">${content.name.charAt(0)}</div>`
+                                }
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-medium text-gray-800 mb-1 truncate">${content.name}</h3>
+                            <div class="text-xs text-gray-500 mb-2">
+                                <div class="truncate-url">${content.url}</div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+                                        ${content.category || 'Sem categoria'}
+                                    </span>
+                                </div>
+                                <div class="flex space-x-1">
+                                    <button class="copy-btn p-1 text-gray-500 hover:text-[#1e40af]" data-id="${content.id}" title="Copiar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                        </svg>
+                                    </button>
+                                    <button class="edit-btn p-1 text-gray-500 hover:text-amber-500" data-id="${content.id}" title="Editar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
+                                    </button>
+                                    <button class="delete-btn p-1 text-gray-500 hover:text-red-500" data-id="${content.id}" title="Excluir">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    elements.contentItems.appendChild(card);
+                    
+                    // Add event listeners
+                    const checkbox = card.querySelector('input[type="checkbox"]');
+                    checkbox.addEventListener('change', () => toggleSelection(content.id));
+                    
+                    const copyBtn = card.querySelector('.copy-btn');
+                    copyBtn.addEventListener('click', () => copyContentToClipboard(content));
+                    
+                    const editBtn = card.querySelector('.edit-btn');
+                    editBtn.addEventListener('click', () => editSingleContent(content));
+                    
+                    const deleteBtn = card.querySelector('.delete-btn');
+                    deleteBtn.addEventListener('click', () => deleteSingleContent(content.id));
+                });
+            }
 
-    <!-- Footer -->
-    <footer class="gradient-bg text-white py-4">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col items-center">
-                <div class="flex items-center mb-3">
-                    <div class="mr-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="#4fd1c5">
-                            <path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <h1 class="text-lg font-bold">Tekinformática</h1>
-                        <p class="text-xs text-cyan-200">Soluções em Tecnologia</p>
-                    </div>
-                </div>
-                <p class="text-xs text-gray-400">© 2011 Tekinformática - Todos os direitos reservados.</p>
-            </div>
-        </div>
-    </footer>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'947848747579ca5d',t:'MTc0ODU0NTczNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+            function renderImportedLinks() {
+                if (state.selectedContents.length === 0) {
+                    elements.importedLinks.innerHTML = `
+                        <tr>
+                            <td colspan="3" class="text-center py-8 text-gray-500">
+                                Nenhum conteúdo selecionado. Selecione itens na Biblioteca para visualizar aqui.
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                elements.importedLinks.innerHTML = '';
+
+                // Sort by episode number if possible (for proper sequence)
+                const sortedContents = [...state.selectedContents].sort((a, b) => {
+                    // Try to extract episode numbers (e.g., S01E01)
+                    const epRegex = /S(\d+)E(\d+)/i;
+                    const matchA = a.name.match(epRegex);
+                    const matchB = b.name.match(epRegex);
+                    
+                    if (matchA && matchB) {
+                        const seasonA = parseInt(matchA[1]);
+                        const seasonB = parseInt(matchB[1]);
+                        
+                        if (seasonA !== seasonB) {
+                            return seasonA - seasonB;
+                        }
+                        
+                        const episodeA = parseInt(matchA[2]);
+                        const episodeB = parseInt(matchB[2]);
+                        return episodeA - episodeB;
+                    }
+                    
+                    return 0; // Keep original order if no episode pattern found
+                });
+
+                sortedContents.forEach(content => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-gray-50 transition';
+                    
+                    row.innerHTML = `
+                        <td class="px-4 py-3 border-b border-gray-100">
+                            <div class="flex items-center">
+                                ${content.logo ? `<img src="${content.logo}" alt="Logo" class="w-6 h-6 mr-2 object-contain">` : ''}
+                                <span>${content.name}</span>
+                            </div>
+                        </td>
+                        <td class="px-4 py-3 border-b border-gray-100">
+                            <span class="truncate-url">${content.url}</span>
+                        </td>
+                        <td class="px-4 py-3 border-b border-gray-100">
+                            <span class="truncate-url">${content.logo || '-'}</span>
+                        </td>
+                    `;
+                    
+                    elements.importedLinks.appendChild(row);
+                });
+            }
+
+            function copyContentToClipboard(content) {
+                const m3uContent = `#EXTINF:-1 tvg-name="${content.name}" tvg-logo="${content.logo}" group-title="${content.category}", ${content.name}\n${content.url}`;
+                
+                navigator.clipboard.writeText(m3uContent)
+                    .then(() => {
+                        showToast('Conteúdo copiado para a área de transferência');
+                    })
+                    .catch(err => {
+                        showToast('Erro ao copiar para a área de transferência');
+                        console.error('Erro ao copiar: ', err);
+                    });
+            }
+
+            function editSingleContent(content) {
+                state.editingContents = [content];
+                
+                elements.editCategory.value = content.category || '';
+                elements.editGroup.value = content.group || '';
+                elements.editLogo.value = content.logo || '';
+                
+                elements.editModal.classList.remove('hidden');
+            }
+
+            function deleteSingleContent(id) {
+                const index = state.contents.findIndex(content => content.id === id);
+                
+                if (index !== -1) {
+                    const name = state.contents[index].name;
+                    
+                    // Remove from contents
+                    state.contents.splice(index, 1);
+                    
+                    // Remove from selected contents if needed
+                    state.selectedContents = state.selectedContents.filter(content => content.id !== id);
+                    
+                    saveToLocalStorage();
+                    updateFilters();
+                    applyFilters();
+                    showToast(`Conteúdo "${name}" excluído com sucesso`);
+                }
+            }
+
+            function changeView(view) {
+                state.currentView = view;
+                
+                // Update active button
+                document.querySelectorAll('.view-button').forEach(btn => {
+                    btn.classList.remove('active', 'bg-[#1e40af]', 'text-white');
+                    btn.classList.add('bg-gray-100');
+                });
+                
+                document.getElementById(`view-${view}`).classList.add('active', 'bg-[#1e40af]', 'text-white');
+                document.getElementById(`view-${view}`).classList.remove('bg-gray-100');
+                
+                renderContents();
+            }
+
+            function changeTab(tab) {
+                state.currentTab = tab;
+                
+                // Update active tab
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active', 'border-[#1e40af]', 'text-[#1e40af]');
+                    btn.classList.add('border-transparent', 'text-gray-500');
+                });
+                
+                document.getElementById(`tab-${tab}`).classList.add('active', 'border-[#1e40af]', 'text-[#1e40af]');
+                document.getElementById(`tab-${tab}`).classList.remove('border-transparent', 'text-gray-500');
+                
+                // Show/hide content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.add('hidden');
+                });
+                
+                document.getElementById(`content-${tab}`).classList.remove('hidden');
+                
+                if (tab === 'imported') {
+                    renderImportedLinks();
+                }
+            }
+
+            function showToast(message) {
+                elements.toastMessage.textContent = message;
+                elements.toast.classList.remove('translate-y-20', 'opacity-0');
+                
+                setTimeout(() => {
+                    elements.toast.classList.add('translate-y-20', 'opacity-0');
+                }, 3000);
+            }
+
+            function saveToLocalStorage() {
+                try {
+                    localStorage.setItem('m3uContents', JSON.stringify(state.contents));
+                    localStorage.setItem('m3uSelectedContents', JSON.stringify(state.selectedContents.map(c => c.id)));
+                    elements.statusMessage.textContent = `Última atualização: ${new Date().toLocaleTimeString()}`;
+                } catch (error) {
+                    console.error('Erro ao salvar no localStorage:', error);
+                    showToast('Erro ao salvar dados localmente. O armazenamento pode estar cheio.');
+                }
+            }
+
+            function loadFromLocalStorage() {
+                try {
+                    const savedContents = localStorage.getItem('m3uContents');
+                    const savedSelectedIds = localStorage.getItem('m3uSelectedContents');
+                    
+                    if (savedContents) {
+                        state.contents = JSON.parse(savedContents);
+                        
+                        if (savedSelectedIds) {
+                            const selectedIds = JSON.parse(savedSelectedIds);
+                            state.selectedContents = state.contents.filter(content => selectedIds.includes(content.id));
+                        }
+                        
+                        updateFilters();
+                        applyFilters();
+                        elements.statusMessage.textContent = `Dados carregados: ${state.contents.length} conteúdos`;
+                    }
+                } catch (error) {
+                    console.error('Erro ao carregar do localStorage:', error);
+                }
+            }
+
+            // Initialize demo data if no content exists
+            function initializeDemoData() {
+                if (state.contents.length === 0) {
+                    const demoContents = [
+                        
+                    ];
+                    
+                    state.contents = demoContents;
+                    saveToLocalStorage();
+                    updateFilters();
+                    applyFilters();
+                }
+            }
+
+            // Initialize with demo data
+            initializeDemoData();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94bf93a3956764fd',t:'MTc0OTI5MzMwMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
